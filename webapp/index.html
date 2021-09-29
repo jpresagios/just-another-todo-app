@@ -9,26 +9,25 @@
       id="sap-ui-bootstrap"
       src="resources/sap-ui-core.js"
       data-sap-ui-libs="sap.m"
-      data-sap-ui-preload="async"
-      data-sap-ui-xx-bindingSyntax="complex"
-      data-sap-ui-resourceroots='{"sap.demo.todo": "./"}'
+      data-sap-ui-xx-waitForTheme="true"
+      data-sap-ui-theme="sap_fiori_3"
+      data-sap-ui-resourceRoots='{
+			"sap.demo.todo": "./"
+		}'
+      data-sap-ui-onInit="module:sap/ui/core/ComponentSupport"
+      data-sap-ui-compatVersion="edge"
+      data-sap-ui-async="true"
     ></script>
 
     <script>
       sap.ui.getCore().attachInit(function () {
         sap.ui.require(
-          [
-            "sap/m/Shell",
-            "sap/ui/core/ComponentContainer",
-            "sap/demo/todo/Component",
-          ],
-          function (Shell, ComponentContainer, Component) {
-            new Shell({
-              app: new ComponentContainer({
-                height: "100%",
-                component: new Component({
-                  id: "mvcAppComponent",
-                }),
+          ["sap/ui/core/ComponentContainer", "sap/demo/todo/Component"],
+          function (ComponentContainer, Component) {
+            new ComponentContainer({
+              height: "100%",
+              component: new Component({
+                id: "mvcAppComponent",
               }),
             }).placeAt("content");
           }
