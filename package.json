@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/jpresagios/sapui5-todo#readme",
   "devDependencies": {
-    "@ui5/cli": "^2.12.1"
+    "@ui5/cli": "^2.12.1",
+    "eslint": "^7.32.0"
   }
 }
