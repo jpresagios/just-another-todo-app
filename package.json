@@ -20,6 +20,7 @@
   "homepage": "https://github.com/jpresagios/sapui5-todo#readme",
   "devDependencies": {
     "@ui5/cli": "^2.12.1",
-    "eslint": "^7.32.0"
+    "eslint": "^7.32.0",
+    "ui5-middleware-livereload": "^0.5.5"
   }
 }
