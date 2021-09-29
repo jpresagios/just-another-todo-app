@@ -1,7 +1,7 @@
 {
   "_version": "1.94.1",
   "sap.app": {
-    "id": "sap.ui.demo.todo",
+    "id": "sap.demo.todo",
     "type": "application"
   },
   "sap.ui5": {
