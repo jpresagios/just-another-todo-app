@@ -1,0 +1,23 @@
+{
+  "_version": "1.94.1",
+  "sap.app": {
+    "id": "sap.ui.demo.todo",
+    "type": "application"
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.f": {},
+        "sap.ui.unified": {}
+      }
+    },
+    "rootView": {
+      "viewName": "sap.ui.demo.todo.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    }
+  }
+}
