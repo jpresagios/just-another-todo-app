@@ -1,16 +1,28 @@
-<View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:core="sap.ui.core" controllerName="sap.demo.todo.controller.App">
+<View xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.f" xmlns="sap.m" xmlns:core="sap.ui.core" controllerName="sap.demo.todo.controller.App">
 	<Page>
+		<customHeader>
+			<f:ShellBar title="Todo" homeIcon="{:= Helper.resolvePath('./img/logo_ui5.png') }" />
+		</customHeader>
 		<content>
-			<List id="todoList" items="{ path: '/todos', events: { change: '.updateItemsLeftCount' } }">
-				<CustomListItem>
-					<HBox>
-						<CheckBox selected="{completed}" />
-						<VBox justifyContent="Center">
-							<Text text="{title}" />
-						</VBox>
-					</HBox>
-				</CustomListItem>
-			</List>
+			<f:DynamicPage>
+				<f:header>
+					<f:DynamicPageHeader pinnable="false">
+						<Input class="todoInput" id="addTodoItemInput" placeholder="{i18n>INPUT_PLACEHOLDER}" value="{/newTodo}" change=".addTodo" />
+					</f:DynamicPageHeader>
+				</f:header>
+				<f:content>
+					<List id="todoList" items="{ path: '/todos', events: { change: '.updateItemsLeftCount' } }">
+						<CustomListItem>
+							<HBox>
+								<CheckBox selected="{completed}" />
+								<VBox justifyContent="Center">
+									<Text text="{title}" />
+								</VBox>
+							</HBox>
+						</CustomListItem>
+					</List>
+				</f:content>
+			</f:DynamicPage>
 		</content>
 	</Page>
 </View>
