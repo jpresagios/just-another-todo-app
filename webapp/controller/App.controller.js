@@ -24,9 +24,11 @@ sap.ui.define(
 
       addTodo: function() {
         var oModel = this.getView().getModel();
-        var aTodos = oModel.getProperty("/todos").map(function(oTodo) {
-          return Object.assign({}, oTodo);
-        });
+
+        // var aTodos = oModel.getProperty("/todos").map(function(oTodo) {
+        //   return Object.assign({}, oTodo);
+        // });
+        var aTodos = oModel.getProperty("/todos");
 
         // Why not ...
         // oModel.getProperty("/todos").push(...)
