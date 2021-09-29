@@ -1,7 +1,16 @@
-<View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+<View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:core="sap.ui.core" controllerName="sap.demo.todo.controller.App">
 	<Page>
 		<content>
-			<Text text="Hola" />
+			<List id="todoList" items="{ path: '/todos', events: { change: '.updateItemsLeftCount' } }">
+				<CustomListItem>
+					<HBox>
+						<CheckBox selected="{completed}" />
+						<VBox justifyContent="Center">
+							<Text text="{title}" />
+						</VBox>
+					</HBox>
+				</CustomListItem>
+			</List>
 		</content>
 	</Page>
 </View>
