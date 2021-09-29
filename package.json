@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ui5 serve"
+    "start": "ui5 serve",
+    "lint": "eslint webapp"
   },
   "repository": {
     "type": "git",
