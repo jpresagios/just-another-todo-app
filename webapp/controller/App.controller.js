@@ -1,15 +1,15 @@
 sap.ui.define(
   [
-    "sap/ui/Device",
-    "sap/ui/core/mvc/Controller",
-    "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator",
-    "sap/ui/model/json/JSONModel",
+    'sap/ui/Device',
+    'sap/ui/core/mvc/Controller',
+    'sap/ui/model/Filter',
+    'sap/ui/model/FilterOperator',
+    'sap/ui/model/json/JSONModel',
   ],
   function(Device, Controller, Filter, FilterOperator, JSONModel) {
-    "use strict";
+    'use strict';
 
-    return Controller.extend("sap.ui.demo.todo.controller.App", {
+    return Controller.extend('sap.ui.demo.todo.controller.App', {
       onInit: function() {
         this.aSearchFilters = [];
         this.aTabFilters = [];
@@ -18,7 +18,7 @@ sap.ui.define(
           new JSONModel({
             filterText: undefined,
           }),
-          "view"
+          'view'
         );
       },
 
@@ -28,18 +28,18 @@ sap.ui.define(
         // var aTodos = oModel.getProperty("/todos").map(function(oTodo) {
         //   return Object.assign({}, oTodo);
         // });
-        var aTodos = oModel.getProperty("/todos");
+        var aTodos = oModel.getProperty('/todos');
 
         // Why not ...
         // oModel.getProperty("/todos").push(...)
 
         aTodos.push({
-          title: oModel.getProperty("/newTodo"),
+          title: oModel.getProperty('/newTodo'),
           completed: false,
         });
 
-        oModel.setProperty("/todos", aTodos);
-        oModel.setProperty("/newTodo", "");
+        oModel.setProperty('/todos', aTodos);
+        oModel.setProperty('/newTodo', '');
       },
 
       clearCompleted: function() {
@@ -48,7 +48,7 @@ sap.ui.define(
         //   return Object.assign({}, oTodo);
         // });
 
-        var aTodos = oModel.getProperty("/todos");
+        var aTodos = oModel.getProperty('/todos');
 
         var i = aTodos.length;
         while (i--) {
@@ -58,7 +58,7 @@ sap.ui.define(
           }
         }
 
-        oModel.setProperty("/todos", aTodos);
+        oModel.setProperty('/todos', aTodos);
       },
 
       /**
@@ -66,13 +66,13 @@ sap.ui.define(
 		 */
       updateItemsLeftCount: function() {
         var oModel = this.getView().getModel();
-        var aTodos = oModel.getProperty("/todos") || [];
+        var aTodos = oModel.getProperty('/todos') || [];
 
         var iItemsLeft = aTodos.filter(function(oTodo) {
           return oTodo.completed !== true;
         }).length;
 
-        oModel.setProperty("/itemsLeftCount", iItemsLeft);
+        oModel.setProperty('/itemsLeftCount', iItemsLeft);
       },
 
       /**
@@ -88,15 +88,15 @@ sap.ui.define(
         // add filter for search
         this.sSearchQuery = oEvent.getSource().getValue();
         if (this.sSearchQuery && this.sSearchQuery.length > 0) {
-          oModel.setProperty("/itemsRemovable", false);
+          oModel.setProperty('/itemsRemovable', false);
           var filter = new Filter(
-            "title",
+            'title',
             FilterOperator.Contains,
             this.sSearchQuery
           );
           this.aSearchFilters.push(filter);
         } else {
-          oModel.setProperty("/itemsRemovable", true);
+          oModel.setProperty('/itemsRemovable', true);
         }
 
         this._applyListFilters();
@@ -107,21 +107,21 @@ sap.ui.define(
         this.aTabFilters = [];
 
         // add filter for search
-        this.sFilterKey = oEvent.getParameter("item").getKey();
+        this.sFilterKey = oEvent.getParameter('item').getKey();
 
         // eslint-disable-line default-case
         switch (this.sFilterKey) {
-          case "active":
+          case 'active':
             this.aTabFilters.push(
-              new Filter("completed", FilterOperator.EQ, false)
+              new Filter('completed', FilterOperator.EQ, false)
             );
             break;
-          case "completed":
+          case 'completed':
             this.aTabFilters.push(
-              new Filter("completed", FilterOperator.EQ, true)
+              new Filter('completed', FilterOperator.EQ, true)
             );
             break;
-          case "all":
+          case 'all':
           default:
           // Don't use any filter
         }
@@ -130,37 +130,37 @@ sap.ui.define(
       },
 
       _applyListFilters: function() {
-        var oList = this.byId("todoList");
-        var oBinding = oList.getBinding("items");
+        var oList = this.byId('todoList');
+        var oBinding = oList.getBinding('items');
 
-        oBinding.filter(this.aSearchFilters.concat(this.aTabFilters), "todos");
+        oBinding.filter(this.aSearchFilters.concat(this.aTabFilters), 'todos');
 
         var sI18nKey;
-        if (this.sFilterKey && this.sFilterKey !== "all") {
-          if (this.sFilterKey === "active") {
-            sI18nKey = "ACTIVE_ITEMS";
+        if (this.sFilterKey && this.sFilterKey !== 'all') {
+          if (this.sFilterKey === 'active') {
+            sI18nKey = 'ACTIVE_ITEMS';
           } else {
             // completed items: sFilterKey = "completed"
-            sI18nKey = "COMPLETED_ITEMS";
+            sI18nKey = 'COMPLETED_ITEMS';
           }
           if (this.sSearchQuery) {
-            sI18nKey += "_CONTAINING";
+            sI18nKey += '_CONTAINING';
           }
         } else if (this.sSearchQuery) {
-          sI18nKey = "ITEMS_CONTAINING";
+          sI18nKey = 'ITEMS_CONTAINING';
         }
 
         var sFilterText;
         if (sI18nKey) {
           var oResourceBundle = this.getView()
-            .getModel("i18n")
+            .getModel('i18n')
             .getResourceBundle();
           sFilterText = oResourceBundle.getText(sI18nKey, [this.sSearchQuery]);
         }
 
         this.getView()
-          .getModel("view")
-          .setProperty("/filterText", sFilterText);
+          .getModel('view')
+          .setProperty('/filterText', sFilterText);
       },
     });
   }
