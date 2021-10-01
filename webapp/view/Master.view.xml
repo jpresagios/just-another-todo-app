@@ -12,6 +12,25 @@
 				</f:header>
 				<f:content>
 					<List id="todoList" items="{ path: '/todos', events: { change: '.updateItemsLeftCount' } }">
+						<headerToolbar>
+							<OverflowToolbar class="sapUiSizeCompact" visible="{= !${view>/isMobile} }">
+								<ToolbarSpacer />
+								<SearchField id="searchTodoItemsInput" liveChange=".onSearch" width="20rem" />
+								<SegmentedButton selectedKey="all" selectionChange=".onFilter" class="sapMSegmentedButtonNoAutoWidth">
+									<items>
+										<SegmentedButtonItem text="{i18n>LABEL_ALL}" key="all" />
+										<SegmentedButtonItem text="{i18n>LABEL_ACTIVE}" key="active" />
+										<SegmentedButtonItem text="{i18n>LABEL_COMPLETED}" key="completed" />
+									</items>
+								</SegmentedButton>
+								<Button id="clearCompleted" enabled="{/itemsRemovable}" icon="sap-icon://delete" text="{i18n>CLEAR_COMPLETED}" press=".clearCompleted" />
+							</OverflowToolbar>
+						</headerToolbar>
+						<infoToolbar>
+							<OverflowToolbar visible="{= !!${view>/filterText} }" active="false">
+								<Label text="{view>/filterText}" />
+							</OverflowToolbar>
+						</infoToolbar>
 						<CustomListItem>
 							<HBox>
 								<CheckBox selected="{completed}" />
